@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="heading">
+  <div><p class="eyebrow">YOUR EVERYDAY COLLECTION</p><h1>我的穿搭</h1><p class="muted">共 {{ outfits|length }} 套 · 简单记录，随时搭配</p></div>
+  <a class="button" href="{{ url_for('create') }}">＋ 新增穿搭</a>
+</section>
+<div class="grid">
+{% for outfit in outfits %}
+  <article class="card">
+    <span class="tag">{{ outfit['occasion'] }}</span>
+    <h2>{{ outfit['title'] }}</h2>
+    <p class="notes">{{ outfit['notes'] or '还没有备注。' }}</p>
+    <div class="actions">
+      <a class="button secondary" href="{{ url_for('edit', outfit_id=outfit['id']) }}">编辑</a>
+      <form method="post" action="{{ url_for('delete', outfit_id=outfit['id']) }}" data-confirm-delete>
+        <input type="hidden" name="csrf_token" value="{{ session['csrf_token'] }}">
+        <button class="danger" type="submit">删除</button>
+      </form>
+    </div>
+  </article>
+{% else %}
+  <section class="empty"><h2>从第一套穿搭开始</h2><p>例如：白色 T 恤 + 牛仔裤 + 运动鞋。</p><a href="{{ url_for('create') }}">新增我的第一套穿搭 →</a></section>
+{% endfor %}
+</div>
+{% endblock %}

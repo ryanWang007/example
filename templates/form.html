@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{{ url_for('index') }}">← 返回收藏</a>
+<h1>{{ '编辑穿搭' if editing else '新增穿搭' }}</h1>
+<form class="editor card" method="post">
+  <input type="hidden" name="csrf_token" value="{{ session['csrf_token'] }}">
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+  <label for="title">穿搭名称 *</label>
+  <input id="title" name="title" maxlength="80" required value="{{ outfit['title'] }}" placeholder="例如：周末休闲装">
+  <label for="occasion">适用场合 *</label>
+  <input id="occasion" name="occasion" maxlength="40" required value="{{ outfit['occasion'] }}" placeholder="例如：上课 / 约会 / 运动">
+  <label for="notes">搭配备注</label>
+  <textarea id="notes" name="notes" maxlength="1000" rows="5" placeholder="例如：白 T 恤 + 蓝色牛仔裤 + 白色运动鞋">{{ outfit['notes'] }}</textarea>
+  <div class="actions"><button class="button" type="submit">保存穿搭</button><a href="{{ url_for('index') }}">取消</a></div>
+</form>
+{% endblock %}

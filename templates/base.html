@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Lookbook · 穿搭收藏</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="{{ url_for('index') }}">Mini Lookbook</a><span>我的穿搭收藏</span></header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer>记录一套穿搭，留住一个好点子。</footer>
+</body>
+</html>
